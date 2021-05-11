@@ -1,0 +1,29 @@
+package com.src.java.thread.filehandler.filehandler;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.collections4.ListUtils;
+
+public abstract class Baseclass {
+
+	protected List<Textfiles> getFiles(String location)
+	{
+		File[] file=new File(location).listFiles();
+		
+		List<Textfiles> txtfiles=new ArrayList<>();	
+		int count=0;
+		
+		for(File f:file)
+		{
+			txtfiles.add(new Textfiles(++count,f.getName(),location,new java.util.Date()));
+		}
+		return txtfiles;
+	}
+	protected List<List<Textfiles>> getPages(List<Textfiles> files,int count)
+	{
+		return ListUtils.partition(files, count);
+		
+	}
+}
